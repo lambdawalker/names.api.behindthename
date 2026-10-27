@@ -25,7 +25,8 @@
     "dist",
     "README.md",
     "LICENSE",
-    "docs/setup.md"
+    "docs/setup.md",
+    "config.default.yaml"
   ],
   "scripts": {
     "prepare": "npm run build",
@@ -36,14 +37,17 @@
     "research": "node dist/cli.js",
     "mcp": "node dist/mcp-stdio.js",
     "smoke": "node scripts/smoke.mjs",
-    "store:integration": "node scripts/store-integration.mjs"
+    "store:integration": "node scripts/store-integration.mjs",
+    "serve": "node dist/serve.js",
+    "mcp:remote": "node dist/mcp-remote.js"
   },
   "dependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
     "@modelcontextprotocol/server": "2.4.0",
+    "yaml": "2.9.1",
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@modelcontextprotocol/client": "2.4.0",
     "@types/node": "^24.0.0",
     "typescript": "7.0.2",
     "vitest": "5.0.5"
