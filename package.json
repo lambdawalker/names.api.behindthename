@@ -1,0 +1,51 @@
+{
+  "name": "@lambdawalker/names-api-behindthename",
+  "version": "0.1.0",
+  "description": "Credential-safe Behind the Name lookup and related-name research client",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lambdawalker/names.api.behindthename.git"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "names-behindthename": "dist/cli.js",
+    "names-behindthename-mcp": "dist/mcp-stdio.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "docs/setup.md"
+  ],
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "pretest": "npm run build",
+    "test": "vitest run",
+    "research": "node dist/cli.js",
+    "mcp": "node dist/mcp-stdio.js",
+    "smoke": "node scripts/smoke.mjs",
+    "store:integration": "node scripts/store-integration.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
+    "@types/node": "^24.0.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}
