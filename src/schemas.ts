@@ -1,0 +1,12 @@
+import { z } from 'zod';
+export const Name = z.string().trim().min(1).max(256).refine(s => !/[\u0000-\u001f\u007f]/.test(s));
+const Text = z.string().min(1).max(1024);
+export const LookupOptionsSchema = z.strictObject({ exact: z.boolean().default(false) });
+export const RelatedOptionsSchema = z.strictObject({ usage: z.string().regex(/^[a-z][a-z0-9-]{0,31}$/).optional(), gender: z.enum(['m', 'f', 'u', 'mf', 'fm']).optional() });
+export const UsageSchema = z.object({ usage_code: Text, usage_full: Text, usage_gender: z.string().max(32).optional() });
+export const LookupDataSchema = z.array(z.object({ name: Text, gender: z.string().max(32), usages: z.array(UsageSchema).max(1000) })).max(1000);
+export const RelatedDataSchema = z.object({ names: z.array(Text).max(10000) });
+export type LookupData = z.infer<typeof LookupDataSchema>;
+export type RelatedData = z.infer<typeof RelatedDataSchema>;
+export type LookupOptions = z.input<typeof LookupOptionsSchema> & { signal?: AbortSignal };
+export type RelatedOptions = z.input<typeof RelatedOptionsSchema> & { signal?: AbortSignal };
